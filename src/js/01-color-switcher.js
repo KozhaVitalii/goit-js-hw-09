@@ -17,7 +17,8 @@ function onStart() {
 const body = document.querySelector('body');
   colorId = setInterval(() => {
       body.style.backgroundColor = getRandomHexColor();
-      refs.startBtn.disabled = true;
+    refs.startBtn.disabled = true;
+    refs.stopBtn.disabled = false;
   }, 1000);
     
 }
@@ -25,5 +26,6 @@ const body = document.querySelector('body');
 
 function onStop() {
     clearInterval(colorId);
-    refs.startBtn.disabled = false;
+  refs.startBtn.disabled = false;
+  refs.stopBtn.disabled = true;
 }

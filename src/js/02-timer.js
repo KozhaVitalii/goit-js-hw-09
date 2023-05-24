@@ -28,11 +28,14 @@ const options = {
   },
 };
 
+refs.startBtn.disabled = true;
+
 flatpickr('#datetime-picker', options);
 
 // Обработчик события change для выбора даты
 refs.inputField.addEventListener('change', function (event) {
   endTime = new Date(event.target.value);
+  refs.startBtn.disabled = false; // доп.код для деактивации кнопки при загрузке страницы
 });
 
 class Timer {
@@ -53,6 +56,11 @@ class Timer {
     if (this.isActive) {
       return;
     }
+// Доп.код для деактивации поля инпута и кнопки старт:
+  refs.inputField.disabled = true;
+    refs.startBtn.disabled = true;
+    refs.stopBtn.disabled = false;
+    
 
   const currentTime = Date.now();
   const deltaTime = endTime - currentTime;
@@ -82,6 +90,10 @@ class Timer {
     this.isActive = false;
     const time = this.convertMs(0);
     this.onTick(time);
+
+    refs.inputField.disabled = false;
+    refs.startBtn.disabled = false;
+    refs.stopBtn.disabled = true;
   }
 
 // Принимает число, приводит к строке и добавляет в начало 0 если число меньше 2-х знаков
